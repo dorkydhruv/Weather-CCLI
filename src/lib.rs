@@ -19,6 +19,7 @@ struct Weather{
 pub async fn get_weather(city:String, api_key:&str)->Result<(),reqwest::Error>{
     let url = format!("https://api.openweathermap.org/data/2.5/weather?q={}&appid={}",city.trim(),api_key,);
     let response = reqwest::get(&url).await?;
+    //Debugging the response status
     print!("The response is -> {:?}",response.status());
     if response.status().is_success(){
         let weather_data:WeatherData = response.json().await?;
